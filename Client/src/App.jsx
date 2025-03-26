@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// const Signup = async () => {
+//   // const { data, error } = await supabase.auth.signUp({
+//   //   email: "obiagelichinyere566@gmail.com",
+//   //   password: "password1",
+//   // });
+//   const { data, error } = await supabase.auth.signInWithPassword({
+//     email: "obiagelichinyere566@gmail.com",
+//     password: "password1",
+//   });
+//   console.log(data);
+// };
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import { UserContext } from "./UserContext.js";
+import HomePage from "./Pages/HomePage/Homepage.jsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  //initialize all isecontext variables
+  const [userContext, setUserContext] = useState(() => {
+    try {
+      const storedUser = localStorage.getItem("userContext");
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch (error) {
+      console.error("Error parsing stored user:", error);
+      return null;
+    }
+  });
 
+  useEffect(() => {
+    // Save the usecontext data to storage whenever the state changes
+    if (userContext) {
+      localStorage.setItem("userContext", JSON.stringify(userContext));
+    } else {
+      localStorage.removeItem("userContext");
+    }
+  }, [userContext]);
+  //wrap the usecontext around your declared routes
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      <UserContext.Provider value={{ userContext, setUserContext }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </div>
+  );
 }
 
-export default App
+export default App;

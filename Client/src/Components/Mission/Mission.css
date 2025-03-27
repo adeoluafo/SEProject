@@ -1,7 +1,6 @@
 .hero {
   height: 70vh;
-  width: 100%;
-
+  width: 165vh;
   background: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.5) 30%,
@@ -11,7 +10,6 @@
       no-repeat center center / cover;
   display: flex;
   align-items: center;
-
   border-radius: 20px;
   margin-top: 70px;
   color: white;
@@ -22,6 +20,8 @@
 .hero-content {
   max-width: 1500px;
   max-height: 70px;
+  flex: 50%;
+  text-align: left;
 }
 
 .hero h1 {

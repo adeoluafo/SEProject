@@ -8,6 +8,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import LeftPanelSearch from "../../Components/LeftPanelSearch/LeftPanelSearch";
 import SearchBar from "../../Components/SearchBar/SearchBar";
+import Grid from "../../Components/Grid/Grid";
+import Youtube from "../../Components/Youtube/Youtube";
+import Footer from "../../Components/Footer/Footer";
 
 export default function HomePage() {
   return (
@@ -22,9 +25,12 @@ export default function HomePage() {
             </Col>
             <Col xs={9}>
               <SearchBar />
+              <Grid />
             </Col>
           </Row>
         </Container>
+        <Youtube />
+        <Footer />
       </Stack>
     </div>
   );

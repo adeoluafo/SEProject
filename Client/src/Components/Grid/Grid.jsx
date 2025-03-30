@@ -1,6 +1,17 @@
 import React from "react";
 import "./Grid.css";
+import RecipeCard from "../RecipeCard/RecipeCard";
 
 export default function Grid() {
-  return <h1>Grid HERE</h1>;
+  return (
+    <div className="grid-container">
+      {" "}
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+    </div>
+  );
 }

@@ -1,35 +1,64 @@
 import React from "react";
 import "./LeftPanelSearch.css";
 import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 export default function LeftPanelSearch() {
   return (
     <div style={{ textAlign: "left", marginTop: "20px" }}>
       <h2 style={{ marginBottom: "30px" }}>Recipes</h2>
-      <Form.Select
-        aria-label="Default select example"
-        style={{ marginBottom: "22px" }}
+      <FloatingLabel
+        controlId="floatingSelectGrid"
+        label="Duration"
+        style={{ marginBottom: "20px" }}
       >
-        <option>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </Form.Select>
-      <Form.Select
-        aria-label="Default select example"
-        style={{ marginBottom: "22px" }}
+        <Form.Select aria-label="Floating label select example">
+          <option value="Less">Less than 30 minutes</option>
+          <option value="More">More than 30 minutes</option>
+          <option value="All">All</option>
+        </Form.Select>
+      </FloatingLabel>
+      <FloatingLabel
+        controlId="floatingSelectGrid"
+        label="Difficulty"
+        style={{ marginBottom: "20px" }}
       >
-        <option>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </Form.Select>
-      <Form.Select aria-label="Default select example">
-        <option>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </Form.Select>
+        <Form.Select aria-label="Floating label select example">
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+          <option value="All">All</option>
+        </Form.Select>
+      </FloatingLabel>
+      <FloatingLabel
+        controlId="floatingSelectGrid"
+        label="Cuisine"
+        style={{ marginBottom: "20px" }}
+      >
+        <Form.Select aria-label="Floating label select example">
+          <option value="Italian">Italian</option>
+          <option value="Mexican">Mexican</option>
+          <option value="Indian">Indian</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Thai">Thai</option>
+          <option value="Middle Eastern">Middle Eastern</option>
+          <option value="All">All</option>
+        </Form.Select>
+      </FloatingLabel>
+
+      <FloatingLabel
+        controlId="floatingSelectGrid"
+        label="Diet"
+        style={{ marginBottom: "20px" }}
+      >
+        <Form.Select aria-label="Floating label select example">
+          <option value="Regular">Regular</option>
+          <option value="Keto">Keto</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Gluten-Free">Gluten-Free</option>
+          <option value="All">All</option>
+        </Form.Select>
+      </FloatingLabel>
     </div>
   );
 }

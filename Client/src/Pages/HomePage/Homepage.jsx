@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import LeftPanelSearch from "../../Components/LeftPanelSearch/LeftPanelSearch";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 export default function HomePage() {
   return (
@@ -19,7 +20,9 @@ export default function HomePage() {
             <Col>
               <LeftPanelSearch />
             </Col>
-            <Col xs={10}>2 of 3 (wider)</Col>
+            <Col xs={9}>
+              <SearchBar />
+            </Col>
           </Row>
         </Container>
       </Stack>

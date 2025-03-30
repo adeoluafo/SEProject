@@ -4,8 +4,21 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
+import { supabase } from "../../client";
 
 export default function TopBar() {
+  // const login = async () => {
+  //   // const { data, error } = await supabase.auth.signUp({
+  //   //   email: "chinyere.offor@lions.lincoln.edu",
+  //   //   password: "password2",
+  //   // });
+  //   const { data, error } = await supabase.auth.signInWithPassword({
+  //     email: "chinyere.offor@lions.lincoln.edu",
+  //     password: "password2",
+  //   });
+  //   console.log(data);
+  // };
+
   return (
     <Navbar
       fixed="top"
@@ -39,7 +52,7 @@ export default function TopBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link>Home</Nav.Link>
-            <Nav.Link>Recipe</Nav.Link>
+            <Nav.Link>Dashboard</Nav.Link>
             <Nav.Link>Search</Nav.Link>
             <Nav.Link>Favorites</Nav.Link>
           </Nav>

@@ -25,24 +25,24 @@ export default function Footer() {
           <FaInstagram />
         </Col>
       </Row>
-      <Col>
+      <Col style={{ textAlign: "left" }}>
         <p>Presentations</p>
         <p>Professionals</p>
         <p>Stores</p>
       </Col>
-      <Col>
+      <Col style={{ textAlign: "left" }}>
         <p>Webinars</p>
 
         <p>Workshops</p>
 
         <p>Local Meetups</p>
       </Col>
-      <Col>
+      <Col style={{ textAlign: "left" }}>
         <p>Our Initiatives</p>
         <p>Giving Back</p>
         <p>Communities</p>
       </Col>
-      <Col>
+      <Col style={{ textAlign: "left" }}>
         <p>Contact Form</p>
         <p>Work With Us</p>
         <p>Visit Us</p>

@@ -1,18 +1,7 @@
-// const Signup = async () => {
-//   // const { data, error } = await supabase.auth.signUp({
-//   //   email: "obiagelichinyere566@gmail.com",
-//   //   password: "password1",
-//   // });
-//   const { data, error } = await supabase.auth.signInWithPassword({
-//     email: "obiagelichinyere566@gmail.com",
-//     password: "password1",
-//   });
-//   console.log(data);
-// };
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { UserContext } from "./UserContext.js";
+import { UserContext, RecipesContext } from "./UserContext.js";
 import HomePage from "./Pages/HomePage/Homepage.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -27,6 +16,15 @@ function App() {
       return null;
     }
   });
+  const [recipesContext, setRecipesContext] = useState(() => {
+    try {
+      const storedRecipes = localStorage.getItem("recipesContext");
+      return storedRecipes ? JSON.parse(storedRecipes) : null;
+    } catch (error) {
+      console.error("Error parsing stored recipes:", error);
+      return null;
+    }
+  });
 
   useEffect(() => {
     // Save the usecontext data to storage whenever the state changes
@@ -35,16 +33,23 @@ function App() {
     } else {
       localStorage.removeItem("userContext");
     }
-  }, [userContext]);
+    if (recipesContext) {
+      localStorage.setItem("recipesContext", JSON.stringify(recipesContext));
+    } else {
+      localStorage.removeItem("recipesContext");
+    }
+  }, [userContext, recipesContext]);
   //wrap the usecontext around your declared routes
   return (
     <div className="app">
       <UserContext.Provider value={{ userContext, setUserContext }}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-          </Routes>
-        </BrowserRouter>
+        <RecipesContext.Provider value={{ recipesContext, setRecipesContext }}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+            </Routes>
+          </BrowserRouter>
+        </RecipesContext.Provider>
       </UserContext.Provider>
     </div>
   );

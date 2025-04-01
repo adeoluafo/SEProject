@@ -4,21 +4,17 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import { supabase } from "../../client";
+import LoginModal from "../LoginModal/LoginModal";
+import SignUpModal from "../SignUpModal/SignUpModal";
+import { UserContext } from "../../UserContext";
+import { useContext } from "react";
+import { FaRegUserCircle } from "react-icons/fa";
 
 export default function TopBar() {
-  // const login = async () => {
-  //   // const { data, error } = await supabase.auth.signUp({
-  //   //   email: "chinyere.offor@lions.lincoln.edu",
-  //   //   password: "password2",
-  //   // });
-  //   const { data, error } = await supabase.auth.signInWithPassword({
-  //     email: "chinyere.offor@lions.lincoln.edu",
-  //     password: "password2",
-  //   });
-  //   console.log(data);
-  // };
-
+  const { userContext, setUserContext } = useContext(UserContext);
+  const handleSignOut = () => {
+    setUserContext(null);
+  };
   return (
     <Navbar
       fixed="top"
@@ -57,10 +53,22 @@ export default function TopBar() {
             <Nav.Link>Favorites</Nav.Link>
           </Nav>
           <Nav>
-            <Button style={{ marginRight: "10px" }} variant="outline-primary">
-              Sign In
-            </Button>
-            <Button variant="danger">Sign Up</Button>
+            {userContext != null ? (
+              <>
+                <FaRegUserCircle
+                  style={{ fontSize: "28px", marginTop: "5px" }}
+                />
+                &nbsp;
+                <Button variant="danger" onClick={() => handleSignOut()}>
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <LoginModal />
+                <SignUpModal />
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

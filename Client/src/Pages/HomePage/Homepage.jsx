@@ -59,8 +59,10 @@ export default function HomePage() {
       }
     };
 
-    fetchRecipes();
-    fetchFavorites();
+    if (userContext != null) {
+      fetchRecipes();
+      fetchFavorites();
+    }
   }, []);
 
   return (

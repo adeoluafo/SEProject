@@ -7,6 +7,7 @@ import {
   FavoritesContext,
 } from "./UserContext.js";
 import HomePage from "./Pages/HomePage/Homepage.jsx";
+import RecipeDetailsPage from "./Pages/RecipeDetailsPage/RecipeDetailsPage.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/recipe/:id" element={<RecipeDetailsPage />} />
               </Routes>
             </BrowserRouter>
           </FavoritesContext.Provider>

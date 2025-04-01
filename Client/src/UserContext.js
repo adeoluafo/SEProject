@@ -1,4 +1,5 @@
 import { createContext } from "react";
 const UserContext = createContext();
 const RecipesContext = createContext();
-export { UserContext, RecipesContext };
+const FavoritesContext = createContext();
+export { UserContext, RecipesContext, FavoritesContext };

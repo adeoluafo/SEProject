@@ -11,10 +11,58 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 import Grid from "../../Components/Grid/Grid";
 import Youtube from "../../Components/Youtube/Youtube";
 import Footer from "../../Components/Footer/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import {
+  RecipesContext,
+  FavoritesContext,
+  UserContext,
+} from "../../UserContext";
+import { supabase } from "../../client";
 
 export default function HomePage() {
-  useEffect(() => {}, []);
+  const { recipesContext, setRecipesContext } = useContext(RecipesContext);
+  const { favoritesContext, setFavoritesContext } =
+    useContext(FavoritesContext);
+  const { userContext } = useContext(UserContext);
+
+  const [duration, setDuration] = useState("All");
+  const [difficulty, setDifficulty] = useState("All");
+  const [cuisine, setCuisine] = useState("All");
+  const [diet, setDiet] = useState("All");
+  const [keyword, setKeyword] = useState("");
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const { data, error } = await supabase.from("Recipes").select();
+        if (error == null) {
+          setRecipesContext(data);
+        } else {
+          alert(error);
+        }
+      } catch (error) {
+        alert("Fetch Recipes failed: " + error);
+      }
+    };
+    const fetchFavorites = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("User")
+          .select()
+          .eq("user_id", userContext.id);
+        if (error == null) {
+          setFavoritesContext(data);
+        } else {
+          alert(error);
+        }
+      } catch (error) {
+        alert("Fetch favorites failed: " + error);
+      }
+    };
+
+    fetchRecipes();
+    fetchFavorites();
+  }, []);
+
   return (
     <div>
       <TopBar />
@@ -23,11 +71,22 @@ export default function HomePage() {
         <Container>
           <Row>
             <Col>
-              <LeftPanelSearch />
+              <LeftPanelSearch
+                setDuration={setDuration}
+                setDifficulty={setDifficulty}
+                setCuisine={setCuisine}
+                setDiet={setDiet}
+              />
             </Col>
             <Col xs={9}>
-              <SearchBar />
-              <Grid />
+              <SearchBar setKeyword={setKeyword} />
+              <Grid
+                duration={duration}
+                difficulty={difficulty}
+                cuisine={cuisine}
+                diet={diet}
+                keyword={keyword}
+              />
             </Col>
           </Row>
         </Container>

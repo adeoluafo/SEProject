@@ -1,9 +1,15 @@
 import React from "react";
 import "./LeftPanelSearch.css";
 import Form from "react-bootstrap/Form";
+import { useState } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
-export default function LeftPanelSearch() {
+export default function LeftPanelSearch({
+  setDuration,
+  setDifficulty,
+  setCuisine,
+  setDiet,
+}) {
   return (
     <div style={{ textAlign: "left", marginTop: "20px" }}>
       <h2 style={{ marginBottom: "30px" }}>Recipes</h2>
@@ -12,7 +18,11 @@ export default function LeftPanelSearch() {
         label="Duration"
         style={{ marginBottom: "20px" }}
       >
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select
+          aria-label="Floating label select example"
+          defaultValue="All"
+          onChange={(e) => setDuration(e.target.value)}
+        >
           <option value="Less">Less than 30 minutes</option>
           <option value="More">More than 30 minutes</option>
           <option value="All">All</option>
@@ -23,7 +33,11 @@ export default function LeftPanelSearch() {
         label="Difficulty"
         style={{ marginBottom: "20px" }}
       >
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select
+          aria-label="Floating label select example"
+          defaultValue="All"
+          onChange={(e) => setDifficulty(e.target.value)}
+        >
           <option value="Easy">Easy</option>
           <option value="Medium">Medium</option>
           <option value="Hard">Hard</option>
@@ -35,7 +49,11 @@ export default function LeftPanelSearch() {
         label="Cuisine"
         style={{ marginBottom: "20px" }}
       >
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select
+          aria-label="Floating label select example"
+          defaultValue="All"
+          onChange={(e) => setCuisine(e.target.value)}
+        >
           <option value="Italian">Italian</option>
           <option value="Mexican">Mexican</option>
           <option value="Indian">Indian</option>
@@ -51,7 +69,11 @@ export default function LeftPanelSearch() {
         label="Diet"
         style={{ marginBottom: "20px" }}
       >
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select
+          aria-label="Floating label select example"
+          defaultValue="All"
+          onChange={(e) => setDiet(e.target.value)}
+        >
           <option value="Regular">Regular</option>
           <option value="Keto">Keto</option>
           <option value="Vegetarian">Vegetarian</option>

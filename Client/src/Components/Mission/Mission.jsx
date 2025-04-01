@@ -15,7 +15,9 @@ export default function Mission() {
           Cook confidently and create delicious meals your whole family <br />
           will love.
         </p>
-        <Button variant="danger">Sign Up Today</Button>
+        <Button variant="danger" disabled>
+          Sign Up Today
+        </Button>
       </div>
     </div>
   );

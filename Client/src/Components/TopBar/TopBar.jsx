@@ -6,14 +6,22 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import LoginModal from "../LoginModal/LoginModal";
 import SignUpModal from "../SignUpModal/SignUpModal";
-import { UserContext } from "../../UserContext";
+import {
+  UserContext,
+  RecipesContext,
+  FavoritesContext,
+} from "../../UserContext";
 import { useContext } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 
 export default function TopBar() {
   const { userContext, setUserContext } = useContext(UserContext);
+  const { setRecipesContext } = useContext(RecipesContext);
+  const { setFavoritesContext } = useContext(FavoritesContext);
   const handleSignOut = () => {
     setUserContext(null);
+    setRecipesContext(null);
+    setFavoritesContext(null);
   };
   return (
     <Navbar

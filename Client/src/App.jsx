@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { UserContext, RecipesContext } from "./UserContext.js";
+import {
+  UserContext,
+  RecipesContext,
+  FavoritesContext,
+} from "./UserContext.js";
 import HomePage from "./Pages/HomePage/Homepage.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -25,6 +29,15 @@ function App() {
       return null;
     }
   });
+  const [favoritesContext, setFavoritesContext] = useState(() => {
+    try {
+      const storedFavorites = localStorage.getItem("favoritesContext");
+      return storedFavorites ? JSON.parse(storedFavorites) : null;
+    } catch (error) {
+      console.error("Error parsing stored favorites:", error);
+      return null;
+    }
+  });
 
   useEffect(() => {
     // Save the usecontext data to storage whenever the state changes
@@ -38,17 +51,29 @@ function App() {
     } else {
       localStorage.removeItem("recipesContext");
     }
-  }, [userContext, recipesContext]);
+    if (favoritesContext) {
+      localStorage.setItem(
+        "favoritesContext",
+        JSON.stringify(favoritesContext)
+      );
+    } else {
+      localStorage.removeItem("favoritesContext");
+    }
+  }, [userContext, recipesContext, favoritesContext]);
   //wrap the usecontext around your declared routes
   return (
     <div className="app">
       <UserContext.Provider value={{ userContext, setUserContext }}>
         <RecipesContext.Provider value={{ recipesContext, setRecipesContext }}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-            </Routes>
-          </BrowserRouter>
+          <FavoritesContext.Provider
+            value={{ favoritesContext, setFavoritesContext }}
+          >
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+              </Routes>
+            </BrowserRouter>
+          </FavoritesContext.Provider>
         </RecipesContext.Provider>
       </UserContext.Provider>
     </div>

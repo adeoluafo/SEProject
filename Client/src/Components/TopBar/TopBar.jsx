@@ -55,9 +55,11 @@ export default function TopBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link>Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link>Dashboard</Nav.Link>
-            <Nav.Link>Search</Nav.Link>
+            <Nav.Link href="/search" disabled={userContext == null}>
+              Search
+            </Nav.Link>
             <Nav.Link>Favorites</Nav.Link>
           </Nav>
           <Nav>

@@ -9,6 +9,14 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import Table from "react-bootstrap/Table";
+import { IoPeople } from "react-icons/io5";
+import { CiTimer } from "react-icons/ci";
+import { PiBowlFoodFill } from "react-icons/pi";
+import ListGroup from "react-bootstrap/ListGroup";
+import { FaUserCircle } from "react-icons/fa";
+import { FcRating } from "react-icons/fc";
+import Footer from "../../Components/Footer/Footer";
 
 export default function RecipeDetailsPage() {
   const location = useLocation();
@@ -36,21 +44,105 @@ export default function RecipeDetailsPage() {
     }
   }, []);
   console.log(recipe);
-  return (
-    <div>
-      <TopBar />
-      {recipe != null && (
+  if (recipe != null) {
+    const directions = recipe.directions;
+    const ingredients = recipe.ingredients;
+    const comments = recipe.comments;
+    return (
+      <div>
+        <TopBar />
+
         <Stack gap={3}>
           <Container>
             <Row style={{ marginTop: "70px" }}>
               <Col>
-                <Image src={recipe.image_url} rounded />
+                <Image
+                  src={recipe.image_url}
+                  rounded
+                  style={{ width: "100%" }}
+                />
               </Col>
-              <Col>{recipe.title}</Col>
+              <Col style={{ textAlign: "left" }}>
+                <h1>{recipe.title}</h1>
+                <p
+                  style={{
+                    marginTop: "20px",
+                    fontSize: "20px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  {recipe.description}
+                </p>
+                <Table striped bordered hover style={{ fontSize: "21px" }}>
+                  <thead>
+                    <tr>
+                      <th>
+                        <PiBowlFoodFill style={{ marginLeft: "40px" }} />
+                        <br />
+                        {recipe.cuisine} Cuisine
+                      </th>
+                      <th>
+                        <CiTimer style={{ marginLeft: "40px" }} />
+                        <br />
+                        {recipe.time} Minutes
+                      </th>
+                      <th>
+                        <IoPeople style={{ marginLeft: "40px" }} />
+                        <br />
+                        {recipe.servings} Servings
+                      </th>
+                    </tr>
+                  </thead>
+                </Table>
+                <p style={{ fontSize: "17px" }}>Course: {recipe.course}</p>
+                <p style={{ fontSize: "17px" }}>Diet: {recipe.diet}</p>
+              </Col>
             </Row>
           </Container>
+          <Container>
+            <Row style={{ marginTop: "30px" }}>
+              <Col xs={7} style={{ textAlign: "left" }}>
+                <h4 style={{ marginBottom: "20px" }}>How to make It</h4>
+                <ListGroup as="ol" numbered>
+                  {directions.map((direction) => (
+                    <ListGroup.Item as="li">{direction}</ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </Col>
+              <Col style={{ textAlign: "left" }}>
+                <h4 style={{ marginBottom: "20px" }}>Ingredients</h4>
+                <ListGroup variant="primary">
+                  {ingredients.map((ingredient) => (
+                    <ListGroup.Item as="li">{ingredient}</ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </Col>
+            </Row>
+          </Container>
+          <Container style={{ marginTop: "20px", textAlign: "left" }}>
+            <h4 style={{ marginBottom: "20px" }}>Comments</h4>
+            <ListGroup>
+              {comments.map((comment) => (
+                <ListGroup.Item as="li">
+                  <FaUserCircle style={{ fontSize: "30px" }} />
+                  <br />
+                  <FcRating />
+                  <FcRating />
+                  <FcRating />
+                  <FcRating />
+                  <FcRating />
+                  <p> Time spent: {comment.time}</p>
+                  <p> Rating: {comment.rating} </p>
+                  <p> Serving: {comment.serving}</p>
+                  <p> Difficulty: {comment.difficulty} </p>
+                  <p> Tip: {comment.directions}</p>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </Container>
+          <Footer />
         </Stack>
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
 }

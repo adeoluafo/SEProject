@@ -10,6 +10,7 @@ import HomePage from "./Pages/HomePage/Homepage.jsx";
 import RecipeDetailsPage from "./Pages/RecipeDetailsPage/RecipeDetailsPage.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchPage from "./Pages/SearchPage/SearchPage.jsx";
+import DashboardPage from "./Pages/DashboardPage/DashboardPage.jsx";
 
 function App() {
   //initialize all isecontext variables
@@ -75,6 +76,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/recipe/:id" element={<RecipeDetailsPage />} />
                 <Route path="/search" element={<SearchPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
               </Routes>
             </BrowserRouter>
           </FavoritesContext.Provider>

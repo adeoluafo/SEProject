@@ -13,15 +13,18 @@ import {
 } from "../../UserContext";
 import { useContext } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function TopBar() {
   const { userContext, setUserContext } = useContext(UserContext);
   const { setRecipesContext } = useContext(RecipesContext);
   const { setFavoritesContext } = useContext(FavoritesContext);
+  const navigate = useNavigate();
   const handleSignOut = () => {
     setUserContext(null);
     setRecipesContext(null);
     setFavoritesContext(null);
+    navigate("/");
   };
   return (
     <Navbar
@@ -56,7 +59,9 @@ export default function TopBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link>Dashboard</Nav.Link>
+            <Nav.Link href="/dashboard" disabled={userContext == null}>
+              Dashboard
+            </Nav.Link>
             <Nav.Link href="/search" disabled={userContext == null}>
               Search
             </Nav.Link>

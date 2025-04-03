@@ -109,8 +109,8 @@ export default function DashboardPage() {
                       <h5>{recipe.title}</h5>
                       <h6 style={{ marginTop: "20px" }}>Ingredients</h6>
                       <ListGroup style={{ textAlign: "left" }}>
-                        {recipe.ingredients.map((ingredient) => (
-                          <ListGroup.Item as="li" key={ingredient}>
+                        {recipe.ingredients.map((ingredient, index) => (
+                          <ListGroup.Item as="li" key={index}>
                             {ingredient}
                           </ListGroup.Item>
                         ))}
@@ -119,8 +119,8 @@ export default function DashboardPage() {
                     <Col>
                       <h6>Directions</h6>
                       <ListGroup as="ol" numbered style={{ textAlign: "left" }}>
-                        {recipe.directions.map((direction) => (
-                          <ListGroup.Item as="li" key={direction}>
+                        {recipe.directions.map((direction, index) => (
+                          <ListGroup.Item as="li" key={index}>
                             {direction}
                           </ListGroup.Item>
                         ))}
@@ -169,8 +169,8 @@ export default function DashboardPage() {
                       <h5>{recipe.title}</h5>
                       <h6 style={{ marginTop: "20px" }}>Ingredients</h6>
                       <ListGroup style={{ textAlign: "left" }}>
-                        {recipe.ingredients.map((ingredient) => (
-                          <ListGroup.Item as="li" key={ingredient}>
+                        {recipe.ingredients.map((ingredient, index) => (
+                          <ListGroup.Item as="li" key={index}>
                             {ingredient}
                           </ListGroup.Item>
                         ))}
@@ -179,8 +179,8 @@ export default function DashboardPage() {
                     <Col>
                       <h6>Directions</h6>
                       <ListGroup as="ol" numbered style={{ textAlign: "left" }}>
-                        {recipe.directions.map((direction) => (
-                          <ListGroup.Item as="li" key={direction}>
+                        {recipe.directions.map((direction, index) => (
+                          <ListGroup.Item as="li" key={index}>
                             {direction}
                           </ListGroup.Item>
                         ))}

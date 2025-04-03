@@ -17,12 +17,14 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { FaUserCircle } from "react-icons/fa";
 import { FcRating } from "react-icons/fc";
 import Footer from "../../Components/Footer/Footer";
+import CommentsModal from "../../Components/CommentsModal/CommentsModal";
 
 export default function RecipeDetailsPage() {
   const location = useLocation();
   const Id_data = location.state; // Access the passed props
   const Id = Id_data.recipeId;
   const [recipe, setRecipe] = useState(null);
+  const [comments, setComments] = useState(null);
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
@@ -31,7 +33,9 @@ export default function RecipeDetailsPage() {
           .select()
           .eq("id", Id);
         if (error == null) {
-          setRecipe(data[0]);
+          const newRecipe = data[0];
+          setRecipe(newRecipe);
+          setComments(newRecipe.comments);
         } else {
           alert(error);
         }
@@ -43,11 +47,12 @@ export default function RecipeDetailsPage() {
       fetchRecipe();
     }
   }, []);
-  console.log(recipe);
+
   if (recipe != null) {
     const directions = recipe.directions;
     const ingredients = recipe.ingredients;
-    const comments = recipe.comments;
+
+    console.log(comments);
     return (
       <div>
         <TopBar />
@@ -104,16 +109,20 @@ export default function RecipeDetailsPage() {
               <Col xs={7} style={{ textAlign: "left" }}>
                 <h4 style={{ marginBottom: "20px" }}>How to make It</h4>
                 <ListGroup as="ol" numbered>
-                  {directions.map((direction) => (
-                    <ListGroup.Item as="li">{direction}</ListGroup.Item>
+                  {directions.map((direction, index) => (
+                    <ListGroup.Item as="li" key={index}>
+                      {direction}
+                    </ListGroup.Item>
                   ))}
                 </ListGroup>
               </Col>
               <Col style={{ textAlign: "left" }}>
                 <h4 style={{ marginBottom: "20px" }}>Ingredients</h4>
                 <ListGroup variant="primary">
-                  {ingredients.map((ingredient) => (
-                    <ListGroup.Item as="li">{ingredient}</ListGroup.Item>
+                  {ingredients.map((ingredient, index) => (
+                    <ListGroup.Item as="li" key={index}>
+                      {ingredient}
+                    </ListGroup.Item>
                   ))}
                 </ListGroup>
               </Col>
@@ -122,8 +131,8 @@ export default function RecipeDetailsPage() {
           <Container style={{ marginTop: "20px", textAlign: "left" }}>
             <h4 style={{ marginBottom: "20px" }}>Comments</h4>
             <ListGroup>
-              {comments.map((comment) => (
-                <ListGroup.Item as="li">
+              {comments.map((comment, index) => (
+                <ListGroup.Item as="li" key={index}>
                   <FaUserCircle style={{ fontSize: "30px" }} />
                   <br />
                   <FcRating />
@@ -139,6 +148,11 @@ export default function RecipeDetailsPage() {
                 </ListGroup.Item>
               ))}
             </ListGroup>
+            <CommentsModal
+              recipe_id={recipe.id}
+              comments={comments}
+              setComments={setComments}
+            />
           </Container>
           <Footer />
         </Stack>

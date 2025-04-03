@@ -44,7 +44,6 @@ function MyVerticallyCenteredModal(props) {
       const { data, error } = await supabase.from("Recipes").select();
       if (error == null) {
         setRecipesContext(data);
-        location.reload();
       } else {
         console.log(error);
         alert(error);

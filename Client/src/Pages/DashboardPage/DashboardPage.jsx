@@ -14,6 +14,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { supabase } from "../../client";
 import EditRecipeModal from "../../Components/EditRecipeModal/EditRecipeModal";
 import CreateRecipeModal from "../../Components/CreateRecipeModal/CreateRecipeModal";
+import DeleteRecipeModal from "../../Components/DeleteRecipeModal/DeleteRecipeModal";
 
 export default function DashboardPage() {
   const { userContext } = useContext(UserContext);
@@ -45,7 +46,7 @@ export default function DashboardPage() {
     }
 
     filterRecipes();
-  }, []);
+  }, [recipesContext]);
 
   return (
     <div>
@@ -133,7 +134,7 @@ export default function DashboardPage() {
                           <EditRecipeModal recipe={recipe} />
                         </Col>
                         <Col>
-                          <Button variant="danger">Delete</Button>
+                          <DeleteRecipeModal recipe_id={recipe.id} />
                         </Col>
                         <Col>
                           <Button variant="light">Publish</Button>
@@ -193,7 +194,7 @@ export default function DashboardPage() {
                           <EditRecipeModal recipe={recipe} />
                         </Col>
                         <Col>
-                          <Button variant="danger">Delete</Button>
+                          <DeleteRecipeModal recipe_id={recipe.id} />
                         </Col>
                       </Row>
                     </Col>

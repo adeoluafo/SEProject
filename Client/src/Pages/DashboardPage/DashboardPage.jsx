@@ -11,6 +11,8 @@ import Card from "react-bootstrap/Card";
 import Footer from "../../Components/Footer/Footer";
 import Button from "react-bootstrap/esm/Button";
 import ListGroup from "react-bootstrap/ListGroup";
+import { supabase } from "../../client";
+import EditRecipeModal from "../../Components/EditRecipeModal/EditRecipeModal";
 
 export default function DashboardPage() {
   const { userContext } = useContext(UserContext);
@@ -43,7 +45,6 @@ export default function DashboardPage() {
 
     filterRecipes();
   }, []);
-  console.log(posts);
 
   return (
     <div>
@@ -130,7 +131,7 @@ export default function DashboardPage() {
                         }}
                       >
                         <Col>
-                          <Button variant="outline-success">Edit</Button>
+                          <EditRecipeModal recipe={recipe} />
                         </Col>
                         <Col>
                           <Button variant="danger">Delete</Button>

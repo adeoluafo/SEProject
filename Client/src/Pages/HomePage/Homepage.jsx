@@ -50,7 +50,7 @@ export default function HomePage() {
           .select()
           .eq("user_id", userContext.id);
         if (error == null) {
-          setFavoritesContext(data);
+          setFavoritesContext(data[0]);
         } else {
           alert(error);
         }

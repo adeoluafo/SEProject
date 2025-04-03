@@ -13,6 +13,7 @@ import Button from "react-bootstrap/esm/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import { supabase } from "../../client";
 import EditRecipeModal from "../../Components/EditRecipeModal/EditRecipeModal";
+import CreateRecipeModal from "../../Components/CreateRecipeModal/CreateRecipeModal";
 
 export default function DashboardPage() {
   const { userContext } = useContext(UserContext);
@@ -80,9 +81,7 @@ export default function DashboardPage() {
                 </p>
                 Let’s get cooking! 👩🏾‍🍳🔥
                 <br />
-                <Button variant="danger" style={{ marginTop: "20px" }}>
-                  Create new
-                </Button>
+                <CreateRecipeModal />
               </Col>
             </Row>
           </Card>
@@ -191,7 +190,7 @@ export default function DashboardPage() {
                         }}
                       >
                         <Col>
-                          <Button variant="outline-success">Edit</Button>
+                          <EditRecipeModal recipe={recipe} />
                         </Col>
                         <Col>
                           <Button variant="danger">Delete</Button>

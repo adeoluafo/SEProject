@@ -15,6 +15,7 @@ import { supabase } from "../../client";
 import EditRecipeModal from "../../Components/EditRecipeModal/EditRecipeModal";
 import CreateRecipeModal from "../../Components/CreateRecipeModal/CreateRecipeModal";
 import DeleteRecipeModal from "../../Components/DeleteRecipeModal/DeleteRecipeModal";
+import PublishRecipeModal from "../../Components/PublishRecipeModal/PublishRecipeModal";
 
 export default function DashboardPage() {
   const { userContext } = useContext(UserContext);
@@ -137,7 +138,7 @@ export default function DashboardPage() {
                           <DeleteRecipeModal recipe_id={recipe.id} />
                         </Col>
                         <Col>
-                          <Button variant="light">Publish</Button>
+                          <PublishRecipeModal recipe_id={recipe.id} />
                         </Col>
                       </Row>
                     </Col>

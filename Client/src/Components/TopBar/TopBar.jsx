@@ -53,7 +53,7 @@ export default function TopBar() {
             marginRight: "80px",
           }}
         >
-          Adeolu
+          InstaRecipe
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -65,7 +65,9 @@ export default function TopBar() {
             <Nav.Link href="/search" disabled={userContext == null}>
               Search
             </Nav.Link>
-            <Nav.Link>Favorites</Nav.Link>
+            <Nav.Link href="/favorites" disabled={userContext == null}>
+              Favorites
+            </Nav.Link>
           </Nav>
           <Nav>
             {userContext != null ? (

@@ -16,7 +16,7 @@ export default function Footer() {
               color: "rgb(221, 111, 130)",
             }}
           >
-            Adeolu
+            InstaRecipe
           </h3>
         </Col>
         <Col style={{ textAlign: "right", fontSize: "30px" }}>

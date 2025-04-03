@@ -52,6 +52,15 @@ function MyVerticallyCenteredModal(props) {
       alert("Fetch Recipes failed: " + error);
     }
   };
+  function createList(text) {
+    text = text.replace(/\n/g, "");
+    const array =
+      text
+        .match(/[^.!?\n]+[.!?]?/g)
+        ?.map((s) => s.trim())
+        .filter(Boolean) || [];
+    return array;
+  }
   const handleCreate = async (is_published) => {
     try {
       const { error } = await supabase.from("Recipes").insert({
@@ -63,8 +72,8 @@ function MyVerticallyCenteredModal(props) {
         diet: diet,
         cuisine: cuisine,
         course: course,
-        ingredients: ingredients.match(/[^.!?]+[.!?]+/g),
-        directions: directions.match(/[^.!?]+[.!?]+/g),
+        ingredients: createList(ingredients),
+        directions: createList(directions),
         image_url: imageDictionary[cuisine],
         author_id: userContext.id,
         comments: [],
@@ -80,7 +89,7 @@ function MyVerticallyCenteredModal(props) {
       alert("Fetch Recipes failed: " + error);
     }
   };
-  console.log(ingredients.match(/[^.!?]+[.!?]+/g));
+  console.log(createList(ingredients));
   return (
     <Modal
       {...props}

@@ -5,6 +5,7 @@ import {
   UserContext,
   RecipesContext,
   FavoritesContext,
+  LastExploredContext,
 } from "./UserContext.js";
 import HomePage from "./Pages/HomePage/Homepage.jsx";
 import RecipeDetailsPage from "./Pages/RecipeDetailsPage/RecipeDetailsPage.jsx";
@@ -42,6 +43,15 @@ function App() {
       return null;
     }
   });
+  const [lastExploredContext, setLastExploredContext] = useState(() => {
+    try {
+      const storedLastExplored = localStorage.getItem("lastExploredContext");
+      return storedLastExplored ? JSON.parse(storedLastExplored) : "Italian";
+    } catch (error) {
+      console.error("Error parsing stored lastExplored:", error);
+      return "Italian";
+    }
+  });
 
   useEffect(() => {
     // Save the usecontext data to storage whenever the state changes
@@ -63,7 +73,15 @@ function App() {
     } else {
       localStorage.removeItem("favoritesContext");
     }
-  }, [userContext, recipesContext, favoritesContext]);
+    if (lastExploredContext) {
+      localStorage.setItem(
+        "lastExploredContext",
+        JSON.stringify(lastExploredContext)
+      );
+    } else {
+      localStorage.removeItem("lastExploredContext");
+    }
+  }, [userContext, recipesContext, favoritesContext, lastExploredContext]);
   //wrap the usecontext around your declared routes
   return (
     <div className="app">
@@ -72,15 +90,19 @@ function App() {
           <FavoritesContext.Provider
             value={{ favoritesContext, setFavoritesContext }}
           >
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/recipe/:id" element={<RecipeDetailsPage />} />
-                <Route path="/search" element={<SearchPage />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/favorites" element={<FavoritesPage />} />
-              </Routes>
-            </BrowserRouter>
+            <LastExploredContext.Provider
+              value={{ lastExploredContext, setLastExploredContext }}
+            >
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/recipe/:id" element={<RecipeDetailsPage />} />
+                  <Route path="/search" element={<SearchPage />} />
+                  <Route path="/dashboard" element={<DashboardPage />} />
+                  <Route path="/favorites" element={<FavoritesPage />} />
+                </Routes>
+              </BrowserRouter>
+            </LastExploredContext.Provider>
           </FavoritesContext.Provider>
         </RecipesContext.Provider>
       </UserContext.Provider>

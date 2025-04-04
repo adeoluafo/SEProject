@@ -8,6 +8,8 @@ import { useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import Card from "react-bootstrap/esm/Card";
+import Button from "react-bootstrap/esm/Button";
 
 export default function SearchPage() {
   const [duration, setDuration] = useState("All");
@@ -40,6 +42,30 @@ export default function SearchPage() {
           </Col>
         </Row>
       </Container>
+      <Card style={{ textAlign: "left" }}>
+        <Row>
+          <Col>
+            Didn’t find enough recipes? Let’s fix that! 🧑‍🍳✨ <br /> We’ve teamed
+            up with world-class AI to bring you smart, personalized recipes{" "}
+            <br />
+            based on what you already have at home. Just tell us your
+            ingredients, <br />
+            and we’ll handle the rest — easy, fast, and tailored to you. 👉 to
+            <br />
+            generate recipes with AI and turn your kitchen into a five-star
+            experience.
+          </Col>
+          <Col>
+            <Button
+              variant="danger"
+              href="https://www.chatgpt.com"
+              style={{ width: "270px", marginTop: "50px" }}
+            >
+              Click here{" "}
+            </Button>{" "}
+          </Col>
+        </Row>
+      </Card>
       <Footer />
     </div>
   );

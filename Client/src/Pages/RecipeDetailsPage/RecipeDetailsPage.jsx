@@ -3,7 +3,7 @@ import "./RecipeDetailsPage.css";
 import { useLocation } from "react-router-dom";
 import TopBar from "../../Components/TopBar/TopBar";
 import Stack from "react-bootstrap/esm/Stack";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { supabase } from "../../client";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
@@ -18,6 +18,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FcRating } from "react-icons/fc";
 import Footer from "../../Components/Footer/Footer";
 import CommentsModal from "../../Components/CommentsModal/CommentsModal";
+import { LastExploredContext } from "../../UserContext";
 
 export default function RecipeDetailsPage() {
   const location = useLocation();
@@ -25,6 +26,7 @@ export default function RecipeDetailsPage() {
   const Id = Id_data.recipeId;
   const [recipe, setRecipe] = useState(null);
   const [comments, setComments] = useState(null);
+  const { setLastExploredContext } = useContext(LastExploredContext);
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
@@ -35,6 +37,7 @@ export default function RecipeDetailsPage() {
         if (error == null) {
           const newRecipe = data[0];
           setRecipe(newRecipe);
+          setLastExploredContext(newRecipe.cuisine);
           setComments(newRecipe.comments);
         } else {
           alert(error);
